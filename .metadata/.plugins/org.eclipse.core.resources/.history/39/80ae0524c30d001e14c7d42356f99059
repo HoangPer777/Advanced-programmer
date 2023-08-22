@@ -1,0 +1,79 @@
+package survey2;
+
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+public class test extends JFrame{
+	public test() {
+		setTitle("khao sat");
+		
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		
+		
+		JPanel panel1 = new JPanel();
+		panel1.setLayout(new GridLayout(2,2));
+		panel1.add(new JLabel("name"));
+		JTextField text1 = new JTextField(20);
+		panel1.add(text1);
+		panel1.add(new JLabel("id"));
+		JTextField text2 = new JTextField(20);
+		panel1.add(text2);
+		
+		
+		JPanel panel2 = new JPanel();
+		JPanel panelL = new JPanel();
+		panelL.setLayout(new BoxLayout(panelL, BoxLayout.Y_AXIS ));
+		panelL.setBorder(BorderFactory.createTitledBorder("chon nam hoc"));
+		JRadioButton nam1 = new JRadioButton("nam1");
+		JRadioButton nam2 = new JRadioButton("nam1");
+		ButtonGroup gr = new ButtonGroup();
+		gr.add(nam1);
+		gr.add(nam2);
+		panelL.add(nam1);
+		panelL.add(nam2);
+		
+		
+		JPanel panelR = new JPanel();
+		panelR.setLayout(new BoxLayout(panelR, BoxLayout.Y_AXIS ));
+		panelR.setBorder(BorderFactory.createTitledBorder("chon so thich"));
+		JCheckBox thethao = new JCheckBox("the thao");
+		JCheckBox amnhac = new JCheckBox("am nhac");
+		panelR.add(thethao);
+		panelR.add(amnhac);
+		panel2.add(panelL);
+		panel2.add(panelR);
+		
+		
+		
+		
+		JPanel panel3 = new JPanel();
+		JPanel panel4 = new JPanel();
+		
+		
+		this.add(mainPanel);
+		mainPanel.add(panel1);
+		mainPanel.add(panel2);
+		mainPanel.add(panel3);
+		mainPanel.add(panel4);
+		
+		
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		pack();
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		new test();
+	}
+}

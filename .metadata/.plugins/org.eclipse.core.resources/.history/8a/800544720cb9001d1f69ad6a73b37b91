@@ -1,0 +1,11 @@
+package chuong3_bai1_28;
+//Vừa gà vừa chó có 36 con, 100 chân. Hỏi có mấy con gà mấy con chó?
+public class backEnd {
+	public static void chicken_dog(){
+		/*
+		 *  x + y = 36
+		 *  2x + 4y = 100
+		 * => 2 * (36 - y) + 4y = 100
+		 */
+	}
+}

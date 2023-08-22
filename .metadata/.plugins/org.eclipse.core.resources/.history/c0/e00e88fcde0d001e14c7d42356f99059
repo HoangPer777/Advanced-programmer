@@ -1,0 +1,66 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayer;
+import javax.swing.JPanel;
+
+public class draw extends JFrame {
+	private Color[] colors = { Color.RED, Color.GREEN, Color.BLUE, Color.BLACK, Color.YELLOW, Color.DARK_GRAY };
+	JLabel status;
+	public draw() {
+		setTitle("draw app");
+		setSize(600, 300);
+
+		this.add(new ToolBarPane(), BorderLayout.NORTH);
+		this.add(new DrawingPane(), BorderLayout.CENTER);
+		getContentPane().add(new StatusPane(), BorderLayout.SOUTH);
+
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	class shapeButton extends JButton{
+		int colorIndex;
+		public shapeButton(int colorIndex, ActionListener action) {
+			addActionListener(action);
+			setActionCommand("" + colorIndex);
+			setPreferredSize(new Dimension(50, 25));
+			
+		}
+		@Override
+		public void paint(Graphics g) {
+			// TODO Auto-generated method stub
+			setBackground(colors[colorIndex]);
+			super.paintComponent(g);
+		}
+	}
+	
+	class ToolBarPane extends JPanel{
+		public ToolBarPane() {
+			
+		}
+	}
+	class DrawingPane extends JPanel {
+		public DrawingPane() {
+			
+		}
+	}
+	class StatusPane extends JPanel{
+		public StatusPane() {
+			setLayout(new FlowLayout(FlowLayout.LEFT));
+			status = new JLabel(" ");
+			add(status);
+		}
+	}
+	public static void main(String[] args) {
+		new draw();
+	}
+}

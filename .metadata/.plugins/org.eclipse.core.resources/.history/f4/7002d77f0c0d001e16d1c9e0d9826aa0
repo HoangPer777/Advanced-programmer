@@ -1,0 +1,81 @@
+package chuong4_bai1_42;
+//
+///*
+// * Hãy viết phương thức void inLich(byte thu, byte songay) để in lịch của 1 tháng với dữ liệu 
+//vào là thứ của ngày đầu tháng và số ngày trong tháng.
+// */
+//public class Lich {
+//
+//	public static void inLich(byte thu, byte soNgay) {
+//		String arr[][] = new String[6 + 1][6 + 1];
+//
+//		// Dien cac gia tri thu trong tuan vao mang
+//		String[] ThuTrongTuan = { "CN", "HAI", "BA", "TU", "NAM", "SAU", "BAY" };
+//		for (int i = 0; i < ThuTrongTuan.length; i++) {
+//			arr[0][i] = ThuTrongTuan[i];
+//		}
+////
+////		for(int i = 1; i< arr.length ; i++) {
+////			for(int j = 0; j < arr.length-1;j++) {
+////				arr[i][j] = "1";
+////			}
+////		}
+//
+//		// In cac gia tri cua mang ra mang hinh
+//		for (int i = 0; i < arr.length ; i++) {
+//			for (int j = 0; j < arr.length  ; j++) {
+//				System.out.print(arr[i][j] + " ");
+//			}
+//			System.out.println();
+//		}
+//	}
+//
+//	public static void main(String[] args) {
+//		inLich((byte) 3, (byte) 30);
+//	}
+//}
+
+public class Lich {
+    public static void inLich(byte thu, byte songay) {
+//        String[] thuTrongTuan = { "CN", "HAI", "BA", "TU", "NAM", "SAU", "BAY" };
+        System.out.println("Thang nay co " + songay + " ngay");
+//        System.out.println(" " + thuTrongTuan[thu - 1] + "   CN   HAI  BA   TU   NAM  SAU   BAY");
+        System.out.println("  CN  HAI   BA   TU   NAM  SAU   BAY");
+        
+        // In ngày đầu tiên
+        int ngay = 1;
+        if(thu > 7) {
+        	System.out.println("error ko co thu 8, Cn la thu 1");
+        }
+        for (int i = 0; i < 7; i++) { // xác định vị trí ngày đầu tiên ở đâu
+            if (i < thu - 1) { 
+                System.out.print("     ");
+            } else {
+                System.out.printf("%4d ", ngay);
+                ngay++;
+            }
+        }
+        System.out.println();
+/*
+ * %4d là một chuỗi định dạng, có ý nghĩa in ra số nguyên (d) với tối thiểu 4 ký tự 
+ * (bao gồm cả ký tự trắng). Nếu số nguyên có ít hơn 4 ký tự, 
+ * sẽ thêm ký tự trắng vào trước để đạt được độ rộng tối thiểu 4 ký tự.
+ */
+        // In các tuần còn lại
+        while (ngay <= songay) { // bắt đầu từ ngày bằng 2
+            for (int i = 0; i < 7; i++) {
+                if (ngay <= songay) { // ngày vẫn bé hơn 30 thì 
+                    System.out.printf("%4d ", ngay); // điền ngày đó vào 
+                    ngay++;
+                } else {
+                    System.out.print("     "); // nếu lớn hơn 30 thì điền khoảng trống
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        inLich((byte) 1, (byte) 30);
+    }
+}

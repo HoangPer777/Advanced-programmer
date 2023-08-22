@@ -1,0 +1,204 @@
+package drawing;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.*;
+
+import model.AShape;
+import model.Circle;
+import model.Line;
+import model.Rectangle;
+
+public class DrawingFrame extends JFrame {
+	public static final int SHAPE_LINE = 1; // gán số để định danh trong xử lý
+	public static final int SHAPE_RECT = 2;
+	public static final int SHAPE_CIRCLE = 3;
+	private Color[] colors = { Color.RED, Color.GREEN, Color.BLUE, Color.BLACK, Color.YELLOW, Color.DARK_GRAY };
+	private String[] statusText = { "", "Vẽ đường thẳng", "Vẽ hình chữ nhật", "Vẽ hình tròn" };
+	private int shapeType = SHAPE_LINE; // mặc định là vẽ đường thẳng
+	private int colorIndex = 3; // mặc định là màu đen
+
+	private JLabel status;
+
+	public DrawingFrame() {
+		this.add(new ToolbarPane(), BorderLayout.NORTH);
+		getContentPane().add(new DrawingPane(), BorderLayout.CENTER);
+		getContentPane().add(new StatusPane(), BorderLayout.SOUTH);
+
+		setTitle(" App");
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+
+	// bảng chức năng để vẽ hình
+	class ShapeButton extends JButton {
+		static int padding = 10; // icon cách góc bao nhiêu theo đường chéo
+		int shapeType; // lưu trữ hình dạng nút
+
+		public ShapeButton(int shapeType, ActionListener action) {
+			this.shapeType = shapeType;
+			addActionListener(action);
+			setActionCommand("" + shapeType);
+			setPreferredSize(new Dimension(50, 50)); // thiết lập kích thước ưu tiên
+		}
+
+		@Override
+		public void paintComponent(Graphics g) { // method dùng để vẽ hình dạng trên nút
+			super.paintComponent(g); // để vẽ đường viền của cái nút ko có thì ko thấy cái button chỉ thấy cái hình
+										// bên trong
+			g.setColor(Color.RED); // màu của nét icon trong button
+			switch (shapeType) { // nếu nhấn vào nút nào thì nút (lớp) đó tự vẽ hình
+			case SHAPE_LINE:
+				g.drawLine(padding, padding, getWidth() - padding, getHeight() - padding);
+				break;
+
+			case SHAPE_RECT:
+				g.drawRect(padding, padding, getWidth() - 2 * padding, getHeight() - 2 * padding);
+				break;
+			case SHAPE_CIRCLE:
+				g.drawOval(padding, padding, getWidth() - 2 * padding, getHeight() - 2 * padding);
+				break;
+
+			}
+		}
+	}
+
+	// bảng màu
+	class ColorButton extends JButton {
+		int colorIndex;
+
+		public ColorButton(int colorIndex, ActionListener action) {
+			this.colorIndex = colorIndex;
+			addActionListener(action);
+			setActionCommand("" + colorIndex);
+			setPreferredSize(new Dimension(50, 25)); // thiết lập kích thước ưu tiên
+			/*
+			 * Nếu container không có đủ không gian để hiển thị nút với kích thước ưu tiên
+			 * này, container có thể lựa chọn sử dụng một kích thước khác cho nút, dựa trên
+			 * các ràng buộc bố cục và đặc tính của nút.
+			 */
+		}
+
+		@Override
+		public void paintComponent(Graphics g) {
+			setBackground(colors[colorIndex]); // set màu nên dựa trên index
+			super.paintComponent(g); // gọi ra để vẽ, ko có ko vẽ
+		}
+	}
+
+//	vẽ thanh công cụ và xử lý
+	class ToolbarPane extends JPanel {
+		public ToolbarPane() {
+			setLayout(new FlowLayout(FlowLayout.LEFT)); // thanh công cụ căn lề trái
+			ActionListener shapeAction = new ActionListener() { // bắt sk dành cho các nút loại hình
+				@Override
+				public void actionPerformed(ActionEvent e) { // bắt sự kiện nút nào được nhấn và lưu lại vào biến shape
+					shapeType = Integer.parseInt(e.getActionCommand());
+				}
+			};
+			ActionListener colorAction = new ActionListener() { // dành có các nút màu
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					colorIndex = Integer.parseInt(e.getActionCommand()); // bắt sk và lưu lại vào colorIndex
+				}
+			};
+			// add các nút vào
+			add(new ShapeButton(SHAPE_LINE, shapeAction)); // tạo ra các nút và add nó vào luôn
+			add(new ShapeButton(SHAPE_RECT, shapeAction));
+			add(new ShapeButton(SHAPE_CIRCLE, shapeAction));
+  
+			// add các nút màu vào
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(2, 3, 1, 1)); // tạo một cái jpanel trong chỗ này và trong jpanel có các bản màu
+			for (int i = 0; i < 6; i++) {
+				panel.add(new ColorButton(i, colorAction)); // các jpanel đc định nghĩa ở trên với màu chạy từ 0 -> 5
+			}
+			add(panel);
+		}
+	}
+
+	// method dùng để vẽ hình ở center
+	class DrawingPane extends JPanel {
+		List<AShape> shapes = new ArrayList<>(); // khởi tạo một danh sách chứa hình vẽ
+		AShape lastShape = null; // lưu trữ hình vẽ cuối cùng
+		boolean isStarted = false; // kt hình đã bwats đầu hay chưa
+
+		public DrawingPane() { // chính thức vẽ nè
+			MouseAdapter ma = new MouseAdapter() { // theo dõi sự kiện chuột
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (isStarted) { // kt bắt đầu vẽ chưa nếu có thì
+						isStarted = false; //thiết lập lại bằng false khi click chuột lần nữa
+						status.setText(" "); // set trạng thái 
+						lastShape = null; // ko có hình vẽ cuối
+					} else {
+						isStarted = true; // nếu true thì đc vẽ
+						status.setText(statusText[shapeType]); // trạng thái là hình đang vẽ
+						switch (shapeType) {
+						case SHAPE_LINE: // gọi class tương ức để vẽ để vẽ
+							lastShape = new Line(new Point(e.getX(), e.getY()), colors[colorIndex]); 
+							shapes.add(lastShape); 
+							break;
+						case SHAPE_RECT:
+							lastShape = new Rectangle(new Point(e.getX(), e.getY()), colors[colorIndex]);
+							shapes.add(lastShape);
+							break;
+						case SHAPE_CIRCLE:
+							lastShape = new Circle(new Point(e.getX(), e.getY()), colors[colorIndex]);
+							shapes.add(lastShape);
+							break;
+						}
+					}
+				}
+
+				@Override
+				public void mouseMoved(MouseEvent e) { // sử lý sự kiện chuột di chuyển isStarted = true
+					if (isStarted) {
+						lastShape.resize(new Point(e.getX(), e.getY())); // resize trong các lớp con để chỉnh kích thước căn cứ vào lần đầu tiên kich chuột là lần thứ 2
+						repaint(); // gọi ra để vẽ hình theo kích thước 
+					}
+				}
+			};
+
+			addMouseListener(ma);
+			addMouseMotionListener(ma);
+		}
+
+		@Override
+		public void paintComponent(Graphics g) {
+			setBackground(Color.WHITE); // màu nền ở center là màu trắng
+			super.paintComponent(g); // xóa và vẽ lại toàn bộ các đối tượng trên jpanel tránh giữ lại bất kì đối tượng nào đc vẽ trước đó
+			for (AShape shape : shapes) // kêu từng loại hình trong danh sách hình vẽ hình của chính mình
+				shape.draw(g); // bằng cách gọi lại hàm draw
+		}
+
+	}
+
+	class StatusPane extends JPanel {
+		public StatusPane() {
+			setLayout(new FlowLayout(FlowLayout.LEFT));
+			status = new JLabel(" ");
+			add(status);
+		}
+	}
+
+	public static void main(String[] args) {
+		new DrawingFrame();
+	}
+
+}

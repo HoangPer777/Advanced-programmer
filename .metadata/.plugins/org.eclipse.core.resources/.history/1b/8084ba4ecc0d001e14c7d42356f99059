@@ -1,0 +1,61 @@
+package test;
+
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class MainFrame extends JFrame {
+	JTextField idTfield, nameTfield, yearTfield, gradeTfield;
+	JButton button;
+
+	public MainFrame() {
+		super("Quản lý sinh viên");
+		setLocationRelativeTo(null);
+
+		JPanel mainPane = new JPanel();
+		mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.Y_AXIS));
+
+		JPanel panel1 = new JPanel();
+		panel1.setBorder(BorderFactory.createTitledBorder("Thông tin SV"));
+		panel1.setLayout(new GridLayout(4, 2, 10, 5));
+
+		panel1.add(new JLabel("MSSV", JLabel.RIGHT));
+		panel1.add(idTfield = new JTextField(20));
+
+		panel1.add(new JLabel("Họ và tên", JLabel.RIGHT));
+		panel1.add(nameTfield = new JTextField(20));
+
+		panel1.add(new JLabel("Năm sinh", JLabel.RIGHT));
+		panel1.add(yearTfield = new JTextField(20));
+
+		panel1.add(new JLabel("Điểm trung bình", JLabel.RIGHT));
+		panel1.add(gradeTfield = new JTextField(20));
+		mainPane.add(panel1);
+		
+		JPanel panel2 = new JPanel();
+		button = new JButton("Tìm theo MSSV");
+		panel2.add(button);
+		button = new JButton("Thêm sinh viên");
+		panel2.add(button);
+		button = new JButton("Theo Năm");
+		panel2.add(button);
+		button = new JButton("Theo tên");
+		panel2.add(button);
+		mainPane.add(panel2);
+
+		this.add(mainPane);
+		pack();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+
+	}
+	public static void main(String[] args) {
+		new MainFrame();
+	}
+}

@@ -1,0 +1,24 @@
+import java.util.ArrayList;
+
+public class Containn {
+	public static boolean check_contain_array(int arr1[], int arr2[]) {
+		ArrayList<Integer> arrlist = new ArrayList<Integer>();
+		for (int i = 0; i < arr1.length; i++) {
+			arrlist.add(arr1[i]);
+		}
+
+		for (int j = 0; j < arr2.length; j++) {
+			if (!arrlist.contains(arr2[j])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static void main(String[] args) {
+		int arr1[] = { 0, 1, 2, 3, 4, 5, 6 };
+		int arr2[] = { 1, 2, 3};
+		System.out.println("mang 1 chua mang 2: " + check_contain_array(arr1, arr2));
+
+	}
+}

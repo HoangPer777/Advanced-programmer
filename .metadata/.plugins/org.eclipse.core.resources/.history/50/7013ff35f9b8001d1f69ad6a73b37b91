@@ -1,0 +1,39 @@
+package chuong3_bai1_26;
+
+/*
+ * Số Amstrong là số có tổng lập phương các chữ số bằng chính số đó. 
+ * Tìm các số Amstrong có 3 chữ số. Ví dụ: 153 = 1^3 + 5^3 + 3^3
+.
+ */
+public class backEnd {
+	public static int amstrong() {
+		for (int n = 100; n <= 999; n++) {
+			int A = 0;
+//			int i = 0, j = 0, k = 0;
+			int i,j,k;
+//			while (true) {
+//				if (3 / 1 == 0)
+//					break;
+
+				i = n % 10;
+				int n1 = n / 10;
+
+				j = n1 % 10;
+				int n2 = n1 / 10;
+
+				k = n2 % 10;
+//				int n3 = n2 / 10;
+
+				A = (int) (Math.pow(i, 3) + Math.pow(j, 3) + Math.pow(k, 3));
+				if(A == n) {
+					return n;
+				}
+//			}
+			
+
+		}
+		return 0;
+		
+
+	}
+}

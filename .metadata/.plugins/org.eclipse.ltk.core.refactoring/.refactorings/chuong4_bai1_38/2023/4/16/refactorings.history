@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Isprime.java&apos; to &apos;Swing_TH11/src/bai3&apos;&#x0D;&#x0A;- Original project: &apos;chuong4_bai1_38&apos;&#x0D;&#x0A;- Destination element: &apos;Swing_TH11/src/bai3&apos;&#x0D;&#x0A;- Original element: &apos;chuong4_bai1_38.Isprime.java&apos;" description="Copy compilation unit" destination="=Swing_TH11/src&lt;bai3" element1="/src&lt;chuong4_bai1_38{Isprime.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1682092364574" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,227 @@
+package Cau3;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+public class PhieuBauCu extends JPanel {
+    private JButton jbtBoPhieu;
+    private JLabel phieuBauCu;
+    private String[] namePhuong = {"Nguyễn Tấn Khôi", "Nguyễn Xí", "Nguyễn Xuân An", "Hồ Thanh Hà"};
+    private String[] nameQuan = {"Vũ Thái Hòa", "Đỗ Thị Thanh Hương", "Lâm Quốc Quân", "Hồ Thị Lan", "Nguyễn Văn Kiên",
+            "Nguyễn Tấn Phát"};
+    private String[] nameTP = {"Lê Vũ Chương", "Nguyễn Hữu Thịnh", "Huỳnh Thành An", "Phạm Văn Cảnh", "Tạ Thị Kim Chi",
+            "Đặng Quốc Cường", "Trần Quốc Đạo"};
+    private JCheckBox[] cbPhuong;
+    private JCheckBox[] cbQuan;
+    private JCheckBox[] cbTP;
+    private JLabel lbPhuong, lbQuan, lbTP;
+    private JPanel pnCol1, pnCol2, pnCol3;
+    static ArrayList<String> listPhuong = new ArrayList<String>();
+    static ArrayList<String> listQuan = new ArrayList<String>();
+    static ArrayList<String> listTP = new ArrayList<String>();
+    int countPhuong = 0, countQuan = 0, countTP = 0;
+    MyFrame frame;
+
+    public PhieuBauCu(MyFrame frame) {
+        this.frame = frame;
+        setLayout(new BorderLayout());
+
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
+        pnCol1 = new PhuongPanel();
+        contentPanel.add(pnCol1);
+        pnCol2 = new QuanPanel();
+        contentPanel.add(pnCol2);
+        pnCol3 = new TPPanel();
+        contentPanel.add(pnCol3);
+        add(contentPanel, BorderLayout.CENTER);
+
+        add(new Title(), BorderLayout.NORTH);
+
+        add(new Button(), BorderLayout.SOUTH);
+    }
+
+    public class PhuongPanel extends JPanel {
+        public PhuongPanel() {
+            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            TitledBorder titledBorder = BorderFactory.createTitledBorder("CẤP PHƯỜNG (Chọn 3)");
+            titledBorder.setTitleJustification(TitledBorder.LEFT);
+            setBorder(titledBorder);
+            cbPhuong = new JCheckBox[namePhuong.length];
+
+
+            JPanel checkBoxPanel = new JPanel(); // Panel chứa các JCheckBox
+            checkBoxPanel.setLayout(new GridLayout(8, 1, 10, 15));
+
+            for (int i = 0; i < namePhuong.length; i++) {
+                cbPhuong[i] = new JCheckBox(namePhuong[i]);
+                cbPhuong[i].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        countPhuong = 0;
+                        for (JCheckBox checkBox : cbPhuong) {
+                            if (checkBox.isSelected()) {
+                                countPhuong++;
+                            }
+                        }
+                        lbPhuong.setText("Số người đã chọn: " + countPhuong);
+                    }
+                });
+                checkBoxPanel.add(cbPhuong[i]);
+            }
+            add(checkBoxPanel);
+
+            JPanel jPanel = new JPanel();
+            jPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            lbPhuong = new JLabel("Số người đã chọn: ");
+            jPanel.add(lbPhuong);
+            add(jPanel);
+        }
+    }
+
+    public class QuanPanel extends JPanel {
+        public QuanPanel() {
+            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            TitledBorder titledBorder = BorderFactory.createTitledBorder("CẤP QUẬN (Chọn 4)");
+            titledBorder.setTitleJustification(TitledBorder.LEFT);
+            setBorder(titledBorder);
+            cbQuan = new JCheckBox[nameQuan.length];
+
+            JPanel checkBoxPanel = new JPanel();
+            checkBoxPanel.setLayout(new GridLayout(8, 1, 15, 15));
+
+            for (int i = 0; i < nameQuan.length; i++) {
+                cbQuan[i] = new JCheckBox(nameQuan[i]);
+                cbQuan[i].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        countQuan = 0;
+                        for (JCheckBox checkBox : cbQuan) {
+                            if (checkBox.isSelected()) {
+                                countQuan++;
+                            }
+                        }
+                        lbQuan.setText("Số người đã chọn: " + countQuan);
+                    }
+                });
+                checkBoxPanel.add(cbQuan[i]);
+            }
+
+            add(checkBoxPanel);
+
+            JPanel jPanel = new JPanel();
+            jPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            lbQuan = new JLabel("Số người đã chọn: ");
+            jPanel.add(lbQuan);
+            add(jPanel);
+        }
+    }
+
+    public class TPPanel extends JPanel {
+        public TPPanel() {
+            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            TitledBorder titledBorder = BorderFactory.createTitledBorder("CẤP THÀNH PHỐ (Chọn 5)");
+            titledBorder.setTitleJustification(TitledBorder.LEFT);
+            setBorder(titledBorder);
+            cbTP = new JCheckBox[nameTP.length];
+
+            JPanel checkBoxPanel = new JPanel();
+            checkBoxPanel.setLayout(new GridLayout(8, 1, 15, 15));
+
+            for (int i = 0; i < nameTP.length; i++) {
+                cbTP[i] = new JCheckBox(nameTP[i]);
+                cbTP[i].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        countTP = 0;
+                        for (JCheckBox checkBox : cbTP) {
+                            if (checkBox.isSelected()) {
+                                countTP++;
+                            }
+                        }
+                        lbTP.setText("Số người đã chọn: " + countTP);
+                    }
+                });
+                checkBoxPanel.add(cbTP[i]);
+            }
+
+            add(checkBoxPanel);
+
+            JPanel jPanel = new JPanel();
+            jPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            lbTP = new JLabel("Số người đã chọn: ");
+            jPanel.add(lbTP);
+            add(jPanel);
+        }
+    }
+
+    public class Title extends JPanel {
+        public Title() {
+            setLayout(new FlowLayout(FlowLayout.CENTER));
+            setBackground(Color.YELLOW);
+            setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+            phieuBauCu = new JLabel("PHIẾU BẦU CỬ CÁC CẤP");
+            add(phieuBauCu);
+        }
+    }
+
+    public class Button extends JPanel {
+        public Button() {
+            setLayout(new FlowLayout(FlowLayout.RIGHT));
+            jbtBoPhieu = new JButton("Bỏ phiếu");
+            jbtBoPhieu.setPreferredSize(new Dimension(150, 30));
+            jbtBoPhieu.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (countPhuong != 3 ) {
+                        listPhuong.clear();
+                        listPhuong.add("Phiếu không hợp lệ");
+                    } else {
+                        listPhuong.clear();
+                        for (JCheckBox checkBox : cbPhuong) {
+                            if (checkBox.isSelected()) {
+                                listPhuong.add(checkBox.getText());
+                            }
+                        }
+                    }
+                    if (countQuan != 4 ) {
+                        listQuan.clear();
+                        listQuan.add("Phiếu không hợp lệ");
+                    } else {
+                        listQuan.clear();
+                        for (JCheckBox checkBox : cbQuan) {
+                            if (checkBox.isSelected()) {
+                                listQuan.add(checkBox.getText());
+                            }
+                        }
+                    }
+                    if (countTP != 5 ) {
+                        listTP.clear();
+                        listTP.add("Phiếu không hợp lệ");
+                    } else {
+                        listTP.clear();
+                        for (JCheckBox checkBox : cbTP) {
+                            if (checkBox.isSelected()) {
+                                listTP.add(checkBox.getText());
+                            }
+                        }
+                    }
+
+                    KQPhieuBauCu kqPhieuBauCu = new KQPhieuBauCu(frame);
+                    frame.setContentPane(kqPhieuBauCu);
+                    frame.display();
+                }
+            });
+            listPhuong.clear();
+            listQuan.clear();
+            listTP.clear();
+            add(jbtBoPhieu);
+        }
+    }
+
+    public static String toString(ArrayList<String> lst) {
+        return String.join("\n", lst);
+
+    }
+}

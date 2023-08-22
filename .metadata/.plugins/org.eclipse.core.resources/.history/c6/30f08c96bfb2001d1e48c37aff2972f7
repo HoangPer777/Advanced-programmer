@@ -1,0 +1,18 @@
+package chuong3;
+
+import java.util.Scanner;
+
+/*
+ * Cho số tự nhiên n.
+a) Đếm số chữ số của số nguyên đó.
+b) Tìm số đảo ngược của số n
+ */
+public class bai1_17 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("nhap so tu nhien n: ");
+		int n = sc.nextInt();
+		
+		System.out.println(n+"");
+	}
+}

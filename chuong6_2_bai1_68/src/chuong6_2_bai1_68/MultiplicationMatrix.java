@@ -1,0 +1,35 @@
+package chuong6_2_bai1_68;
+/*
+ * Cho ma trận A kích thước m x p và ma trận B kích thước p x n gồm các số. 
+ * Tính ma trận tích C = A x B. Ma trận tích kích thước m x n
+ */
+public class MultiplicationMatrix {
+	public static void multiplicationMatrix(int arr1[][], int arr2[][]) {
+		int[][] resultMatrix = new int[arr1.length][arr2[0].length];  // ma trận kết quả
+		for (int i = 0; i < arr1.length; i++) {
+	         for (int j = 0; j < arr2[0].length; j++) { // độ dài của dòng một của ma trận (so cot)
+	            for (int k = 0; k < arr2.length; k++) {
+	               resultMatrix[i][j] += arr1[i][k] * arr2[k][j];
+	            }
+	         }
+	      }
+	
+		
+	
+		for (int i = 0; i < resultMatrix.length; i++) {
+	         for (int j = 0; j < resultMatrix[0].length; j++) {
+	            System.out.print(resultMatrix[i][j] + " ");
+	         }
+	         System.out.println();
+	      }
+	}
+	
+	public static void main(String[] args) {
+		int[][] matrix1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};  // ma trận 1
+	    int[][] matrix2 = {{17, -3, 2, 8}, {1, -14, 5, 4}, {1, -17, 2, 2}};
+	    int[][] matrix3 = {{2, 3, 3}, {5, 6, 7}};
+	    int [][] matrix4 = {{3, 4}, {5,6}, {7, 8}};
+	    multiplicationMatrix(matrix3, matrix4);
+	    
+	}
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="true"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value="Bỏ phiếu"/>
+		<list key="findhistory">
+			<item value="Bỏ phiếu"/>
+			<item value="bo phieu"/>
+			<item value="min"/>
+			<item value="max"/>
+			<item value="text"/>
+			<item value="setText"/>
+			<item value="selectedYear"/>
+			<item value="index"/>
+			<item value="selectedSub"/>
+			<item value="statusText"/>
+			<item value="drawing2"/>
+			<item value="drawing"/>
+			<item value="panel"/>
+			<item value="createKetButton"/>
+			<item value="x"/>
+		</list>
+		<list key="replacehistory">
+			<item value="negativeMax"/>
+			<item value="positiveMin"/>
+			<item value="drawing"/>
+			<item value=""/>
+			<item value="jpanel"/>
+			<item value="createKeyButton"/>
+			<item value="col"/>
+			<item value="row"/>
+			<item value="size"/>
+			<item value="byte"/>
+			<item value="x"/>
+			<item value="p"/>
+			<item value="matrix"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="566"/>
+		<item key="DIALOG_Y_ORIGIN" value="636"/>
+		<item key="DIALOG_WIDTH" value="1189"/>
+		<item key="DIALOG_HEIGHT" value="393"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|13.8|0|WINDOWS|1|-23|0|0|0|400|0|0|0|0|3|2|1|34|Segoe UI"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="489"/>
+		<item key="DIALOG_Y_ORIGIN" value="281"/>
+	</section>
+</section>

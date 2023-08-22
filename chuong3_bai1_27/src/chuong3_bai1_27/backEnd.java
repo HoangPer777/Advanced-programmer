@@ -1,0 +1,25 @@
+package chuong3_bai1_27;
+
+/*
+ * Số hoàn hảo là số bằng tổng các ước của nó (không kể chính nó). 
+ * Tìm các số hoàn hảo <1000.
+ * Ví dụ: 6 = 1 + 2 + 3
+ */
+public class backEnd {
+	public static void perfectNumber(int n) {
+		
+		for (int a = 1; a < n; a++) {
+			int sum = 0;
+			for (int i = 1; i < a; i++) {
+				if (a % i == 0) {
+					sum += i;
+				}
+			}
+			if (a == sum) {
+				System.out.println("Perfect number is " + a);
+			} else
+				continue;
+
+		}
+	}
+}

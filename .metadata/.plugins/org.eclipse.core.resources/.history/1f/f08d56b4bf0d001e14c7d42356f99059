@@ -1,0 +1,97 @@
+import java.awt.Desktop.Action;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class test extends JFrame {
+	public test() {
+		setTitle("may tinh");
+		setSize(300, 400);
+
+		JPanel displayPL = createDisplayPL();
+		JPanel KeyPL = createKeyPL();
+		this.add(displayPL, BorderLayout.NORTH);
+		this.add(KeyPL, BorderLayout.SOUTH);
+
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+
+	private JPanel createKeyPL() {
+		ActionListener numAction = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		ActionListener funAction = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		};
+
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(4, 4, 10, 10));
+		panel.add(createKeyButton("9", numAction));
+		panel.add(createKeyButton("8", numAction));
+		panel.add(createKeyButton("7", numAction));
+		panel.add(createKeyButton("CE", funAction));
+
+		panel.add(createKeyButton("6", numAction));
+		panel.add(createKeyButton("5", numAction));
+		panel.add(createKeyButton("4", numAction));
+		panel.add(createKeyButton("+", funAction));
+
+		panel.add(createKeyButton("3", numAction));
+		panel.add(createKeyButton("2", numAction));
+		panel.add(createKeyButton("1", numAction));
+		panel.add(createKeyButton("-", funAction));
+
+		panel.add(createKeyButton("0", numAction));
+		panel.add(createKeyButton(".", numAction));
+		panel.add(createKeyButton("=", funAction));
+		panel.add(createKeyButton("*", funAction));
+
+		return panel;
+	}
+
+	private JButton createKeyButton(String text, ActionListener action) {
+		JButton button = new JButton(text);
+		button.setActionCommand(text);
+		button.addActionListener(action);
+		button.setPreferredSize(new Dimension(70, 50));
+		return button;
+	}
+
+	private JPanel createDisplayPL() {
+		// TODO Auto-generated method stub
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		panel.setBackground(Color.blue);
+		JLabel lab = new JLabel();
+		panel.add(lab);
+
+		return panel;
+	}
+
+	public static void main(String[] args) {
+		new test();
+	}
+
+}

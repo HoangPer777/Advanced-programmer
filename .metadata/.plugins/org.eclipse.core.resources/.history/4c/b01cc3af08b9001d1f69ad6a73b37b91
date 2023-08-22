@@ -1,0 +1,23 @@
+package chuong3_bai1_27;
+
+public class frontEnd {
+	public static void main(String[] args) {
+		backEnd.perfectNumber(1000);
+		int n =1000;
+		int sum = 0;
+		int a =1;
+		for (a =1 ; a < n; a++) {
+			for (int i = 1; i < a; i++) {
+				if (a % i == 0) {
+					sum = +i;
+				}
+			}
+			
+
+		}
+		if (a == sum) {
+			System.out.println("Perfect number is " + a);
+		} 
+		System.out.println("");	
+	}
+}

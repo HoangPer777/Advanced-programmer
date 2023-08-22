@@ -1,0 +1,15 @@
+package chuong3_bai1_32;
+
+//Cho số nguyên dương n. Tìm các tam giác có độ dài 3 cạnh là số nguyên và chu vi là n
+public class backEnd {
+	public static void triangle(int n) {
+		for (int i = 0; i <= n; i++) {
+			for (int j = 0; j <= n; j++) {
+				int k = n - i - j;
+				if(k + i + j == n) {
+					System.out.println(i + "" + j + "" + k);
+				}
+			}
+		}
+	}
+}

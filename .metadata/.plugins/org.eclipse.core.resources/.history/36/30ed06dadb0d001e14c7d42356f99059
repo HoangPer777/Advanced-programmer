@@ -1,0 +1,24 @@
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
+public class draw extends JFrame {
+	public draw() {
+		setTitle("draw app");
+		setSize(600, 300);
+		
+		this.add(new ToolBarPane(), BorderLayout.NORTH);
+		
+		
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	
+	class ToolBarPane {
+		public void ToolbarPane() {
+			
+		}
+	}
+}

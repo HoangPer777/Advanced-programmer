@@ -1,0 +1,9 @@
+package chuong3_bai1_22;
+
+public class calculateAngle {
+	public static int angle(int g) {
+		
+		return 0;
+		
+	}
+}

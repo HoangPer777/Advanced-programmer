@@ -1,0 +1,149 @@
+package decuoiki.de2017.bai2;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.util.ArrayList;
+
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+
+public class mainPanel extends JPanel {
+	JPanel centerPanel, botPanel;
+	JLabel nghe, botLabel;
+	JComboBox<String> phanloai;
+	JRadioButton hocsinhR;
+	JRadioButton sinhvienR;
+	JRadioButton kysuR;
+	JCheckBox docbao;
+	JCheckBox docsach;
+	JCheckBox nghenhac;
+	ButtonGroup group;
+	String a;
+	String b;
+	String c;
+	String d;
+	int count = 0;
+	ArrayList<String> hobby = new ArrayList<>();
+
+	public mainPanel() {
+		setLayout(new BorderLayout());
+		a = "";
+		c = "";
+		b = "";
+		String[] h = { " ky thuat ", " xa hoi " };
+		String[] s = { " phan ban ", " khong phan ban " };
+		String[] k = { " co khi ", " CNTT " };
+		phanloai = new JComboBox<String>();
+
+		nghe = new JLabel("Nghe Nghiep");
+		nghe.setForeground(Color.blue);
+
+		botLabel = new JLabel("----------------- ");
+		hocsinhR = new JRadioButton("Hoc Sinh");
+		hocsinhR.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				phanloai.setModel(new DefaultComboBoxModel<>(s));
+				a = "Hoc Sinh";
+				botLabel.setText(a);
+			}
+		});
+		sinhvienR = new JRadioButton("Sinh vien");
+		sinhvienR.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				phanloai.setModel(new DefaultComboBoxModel<>(h));
+				a = " SinhVien ";
+				botLabel.setText(a);
+			}
+		});
+		kysuR = new JRadioButton(" Ky Su ");
+		kysuR.addActionListener(new ActionListener() {
+
+			private boolean flag1;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				phanloai.setModel(new DefaultComboBoxModel<>(k));
+				a = " KySu ";
+				botLabel.setText(a);
+			}
+		});
+
+		phanloai.addActionListener(e -> {
+			b = phanloai.getSelectedItem().toString();
+			botLabel.setText(a + b + " thích " + c);
+		});
+
+		group = new ButtonGroup();
+		group.add(hocsinhR);
+		group.add(sinhvienR);
+		group.add(kysuR);
+
+		docbao = new JCheckBox(" Doc Bao ");
+		docsach = new JCheckBox(" Doc Sach ");
+		nghenhac = new JCheckBox(" Nghe Nhac ");
+
+		docbao.addItemListener(e -> {
+			c = textHobby(docbao.getText(), docbao.isSelected());
+			botLabel.setText(a + b + " thích " + c);
+
+		});
+		docsach.addItemListener(e -> {
+//			e.getStateChange()==ItemEvent.selected
+			c = textHobby(docsach.getText(), docsach.isSelected());
+			botLabel.setText(a + b + " thích " + c);
+		});
+		nghenhac.addItemListener(e -> {
+			c = textHobby(nghenhac.getText(), nghenhac.isSelected());
+			botLabel.setText(a + b + " thích " + c);
+
+		});
+
+		centerPanel = new JPanel();
+		centerPanel.setLayout(new GridLayout(4, 2));
+		centerPanel.setPreferredSize(new Dimension(600, 100));
+		centerPanel.add(nghe);
+		centerPanel.add(phanloai);
+		centerPanel.add(hocsinhR);
+		centerPanel.add(docbao);
+		centerPanel.add(sinhvienR);
+		centerPanel.add(docsach);
+		centerPanel.add(kysuR);
+		centerPanel.add(nghenhac);
+
+		botPanel = new JPanel();
+		botPanel.add(botLabel);
+
+		add(centerPanel, BorderLayout.CENTER);
+		add(botPanel, BorderLayout.SOUTH);
+ 
+	}
+
+	public String textHobby(String text, boolean flag) {
+		if (flag) {
+			hobby.add(text);
+		} else {
+			hobby.remove(text);
+		}
+		String result = hobby.size() == 0 ? "" : hobby.get(0);
+		for (int i = 1; i < hobby.size(); i++) {
+			result += ", " + hobby.get(i);
+		}
+		return result;
+
+	}
+
+}

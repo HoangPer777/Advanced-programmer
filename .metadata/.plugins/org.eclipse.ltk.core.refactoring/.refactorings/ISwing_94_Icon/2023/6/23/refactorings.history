@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;main.png&apos; to &apos;Swing_TH5/src/stm_example&apos;&#x0D;&#x0A;- Original project: &apos;ISwing_94_Icon&apos;&#x0D;&#x0A;- Destination element: &apos;Swing_TH5/src/stm_example&apos;&#x0D;&#x0A;- Original element: &apos;main.png&apos;" description="Copy file" destination="=Swing_TH5/src&lt;stm_example" element1="src/view/main.png" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1685888448884" units="0" version="1.0"/>
+</session>

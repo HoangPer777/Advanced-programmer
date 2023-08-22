@@ -1,0 +1,8 @@
+package chuong3_bai1_22;
+
+public class Main {
+	public static void main(String[] args) {
+		multiplicationTable m1 = new multiplicationTable();
+		
+	}
+}

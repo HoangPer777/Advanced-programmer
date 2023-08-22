@@ -1,0 +1,14 @@
+import javax.swing.JFrame;
+
+public class draw extends JFrame {
+	public draw() {
+		setTitle("draw app");
+		setSize(600, 300);
+		
+		
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+}

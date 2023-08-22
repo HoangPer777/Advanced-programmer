@@ -1,0 +1,53 @@
+package chuong6_1_bai1_58;
+
+import java.util.Arrays;
+
+/*
+ * Cho một dãy gồm n số. 
+a) Kiểm tra xem dãy có tăng dần hay không.
+b) Sắp xếp dãy theo thứ tự tăng dần. In dãy kết quả ra màn hình
+ */
+public class Ascending {
+	public static boolean CheckAscending(int arr[]) {
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] > arr[i + 1]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// Cau b
+	public static void sort(int arr[]) {
+		for (int i = 0; i < arr.length - 1; i++) {
+			if (arr[i] > arr[i + 1]) {
+				int temporary = arr[i];
+				arr[i] = arr[i + 1];
+				arr[i + 1] = temporary;
+			}
+		}
+
+//		if (CheckAscending(arr)) {
+//		} else {
+//			for (int i = 0; i < arr.length - 1; i++) {
+//				if (arr[i] > arr[i + 1]) {
+//					int temporary = arr[i];
+//					arr[i] = arr[i + 1];
+//					arr[i + 1] = temporary;
+//				}
+//			}
+//		}
+//		Arrays.sort(arr);
+
+	}
+
+	public static void main(String[] args) {
+		int arr[] = { 3, 2, 1, 4, 5,7,1, 8, 9 };
+		System.out.println("Mang tang dan phai ko: " + CheckAscending(arr));
+		System.out.println();
+		sort(arr);
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + ", ");
+		}
+	}
+}

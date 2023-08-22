@@ -1,0 +1,56 @@
+package survey2;
+
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class test extends JFrame{
+	public test() {
+		setTitle("khao sat");
+		
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		
+		
+		JPanel panel1 = new JPanel();
+		panel1.setLayout(new GridLayout(2,2));
+		panel1.add(new JLabel("name"));
+		JTextField text1 = new JTextField(20);
+		panel1.add(text1);
+		panel1.add(new JLabel("id"));
+		JTextField text2 = new JTextField(20);
+		panel1.add(text2);
+		
+		
+		JPanel panel2 = new JPanel();
+		JPanel panelL = new JPanel();
+		panelL.setBorder(BorderFactory.createTitledBorder(""));
+		
+		JPanel panelR = new JPanel();
+		
+		
+		JPanel panel3 = new JPanel();
+		JPanel panel4 = new JPanel();
+		
+		
+		this.add(mainPanel);
+		mainPanel.add(panel1);
+		mainPanel.add(panel2);
+		mainPanel.add(panel3);
+		mainPanel.add(panel4);
+		
+		
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		pack();
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		new test();
+	}
+}

@@ -1,0 +1,22 @@
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class test extends JFrame{
+	public test() {
+		setTitle("may tinh");
+		setSize(300, 400);
+		
+		JPanel displayPL = new JPanel();
+		JPanel buttonPL = new JPanel();
+		this.add(displayPL);
+		this.add(buttonPL);
+		
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		new test();
+	}
+	
+}

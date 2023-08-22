@@ -1,0 +1,157 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayer;
+import javax.swing.JPanel;
+
+
+
+
+
+public class draw extends JFrame {
+	public static final int SHAPE_LINE = 1; // gán số để định danh trong xử lý
+	public static final int SHAPE_RECT = 2;
+	public static final int SHAPE_CIRCLE = 3;
+	private Color[] colors = { Color.RED, Color.GREEN, Color.BLUE, Color.BLACK, Color.YELLOW, Color.DARK_GRAY };
+	JLabel status;
+	private int shapeType = SHAPE_LINE;
+	private int colorIndex = 3;
+	public draw() {
+		setTitle("draw app");
+		setSize(600, 300);
+
+		this.add(new ToolBarPane(), BorderLayout.NORTH);
+		this.add(new DrawingPane(), BorderLayout.CENTER);
+		getContentPane().add(new StatusPane(), BorderLayout.SOUTH);
+
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	class ColorButton extends JButton {
+		int colorIndex;
+
+		public ColorButton(int colorIndex, ActionListener action) {
+			this.colorIndex = colorIndex;
+			addActionListener(action);
+			setActionCommand("" + colorIndex);
+			setPreferredSize(new Dimension(50, 25));
+
+		}
+
+		@Override
+		public void paint(Graphics g) {
+			// TODO Auto-generated method stub
+			setBackground(colors[colorIndex]);
+			super.paintComponent(g);
+		}
+	}
+
+	class ShapeButton extends JButton {
+		static int padding = 10;
+		int shapeType;
+
+		public ShapeButton(int shapeType, ActionListener action) {
+			this.shapeType = shapeType;
+			addActionListener(action);
+			setActionCommand("" + shapeType);
+			setPreferredSize(new Dimension(50, 50)); // thiết lập kích thước ưu tiên
+		}
+
+		@Override
+		public void paint(Graphics g) {
+			// TODO Auto-generated method stub
+			super.paintComponent(g);
+			g.setColor(Color.RED);
+			switch (shapeType) {
+			case SHAPE_LINE: {
+				g.drawLine(padding, padding, getWidth() - padding, getHeight() - padding);
+				break;
+			}
+			case SHAPE_CIRCLE: {
+				g.drawOval(padding, padding, getWidth() - 2 * padding, getHeight() - 2 * padding);
+				break;
+			}
+			case SHAPE_RECT: {
+				g.drawRect(padding, padding, getWidth() - 2 * padding, getHeight() - 2 * padding);
+				
+			}
+			}
+		}
+	}
+
+	class ToolBarPane extends JPanel {
+		public ToolBarPane() {
+			setLayout(new FlowLayout(FlowLayout.LEFT));
+			ActionListener shapeAction = new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					shapeType = Integer.parseInt(e.getActionCommand());
+				}
+			};
+			
+			add(new ShapeButton(SHAPE_LINE, shapeAction)); // tạo ra các nút và add nó vào luôn
+			add(new ShapeButton(SHAPE_RECT, shapeAction));
+			add(new ShapeButton(SHAPE_CIRCLE, shapeAction));
+			
+			ActionListener colorAction = new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					colorIndex = Integer.parseInt(e.getActionCommand());
+				}
+			};
+			
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(2, 3, 2, 2));
+			for(int i = 0; i < 6; i++) {
+				panel.add(new ColorButton(i, colorAction));
+			}
+			add(panel);
+		}
+	}
+
+	class DrawingPane extends JPanel {
+		List<AShape> shapes = new ArrayList<>(); // khởi tạo một danh sách chứa hình vẽ
+		AShape lastShape = null; // lưu trữ hình vẽ cuối cùng
+		boolean isStarted = false;
+		public DrawingPane() {
+			MouseAdapter ma = new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			};
+		}
+	}
+
+	class StatusPane extends JPanel {
+		public StatusPane() {
+			setLayout(new FlowLayout(FlowLayout.LEFT));
+			status = new JLabel(" ");
+			add(status);
+		}
+	}
+
+	public static void main(String[] args) {
+		new draw();
+	}
+}

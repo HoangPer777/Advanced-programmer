@@ -1,0 +1,150 @@
+package test;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import stm_example.Student;
+import stm_example.StudentManagement;
+
+public class MainFrame extends JFrame {
+	JTextField idTfield, nameTfield, yearTfield, gradeTfield;
+	JButton button;
+	StudentManagement stm = new StudentManagement();
+	public MainFrame() {
+		
+		super("Quản lý sinh viên");
+		setLocationRelativeTo(null);
+
+		JPanel mainPane = new JPanel();
+		mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.Y_AXIS));
+
+		JPanel panel1 = new JPanel();
+		panel1.setBorder(BorderFactory.createTitledBorder("Thông tin SV"));
+		panel1.setLayout(new GridLayout(4, 2, 10, 5));
+
+		panel1.add(new JLabel("MSSV", JLabel.RIGHT));
+		panel1.add(idTfield = new JTextField(20));
+
+		panel1.add(new JLabel("Họ và tên", JLabel.RIGHT));
+		panel1.add(nameTfield = new JTextField(20));
+
+		panel1.add(new JLabel("Năm sinh", JLabel.RIGHT));
+		panel1.add(yearTfield = new JTextField(20));
+
+		panel1.add(new JLabel("Điểm trung bình", JLabel.RIGHT));
+		panel1.add(gradeTfield = new JTextField(20));
+		mainPane.add(panel1);
+
+		JPanel panel2 = new JPanel();
+		ActionListener aciton = createAction();
+		button = new JButton("Tìm theo MSSV");
+		button.setActionCommand("FIND");
+		button.addActionListener(aciton);
+		panel2.add(button);
+
+		button = new JButton("Thêm sinh viên");
+		button.setActionCommand("ADD");
+		button.addActionListener(aciton);
+		panel2.add(button);
+
+		button = new JButton("Theo Năm");
+		button.setActionCommand("YEAR");
+		button.addActionListener(aciton);
+		panel2.add(button);
+
+		button = new JButton("Theo tên");
+		button.setActionCommand("NAME");
+		button.addActionListener(aciton);
+		panel2.add(button);
+		mainPane.add(panel2);
+
+		String text = "MSSV\t Họ và tên\t Năm sinh\t Điểm trung bình";
+		JTextArea textArea = new JTextArea(text);
+		textArea.setPreferredSize(new Dimension(400, 200));
+
+		JScrollPane sc = new JScrollPane(textArea);
+		mainPane.add(sc);
+
+		this.add(mainPane);
+		pack();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+
+	}
+
+	private ActionListener createAction() {
+
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String command = e.getActionCommand();
+				switch (command) {
+				case "FIND": {
+					find();
+					break;
+				}
+				case "ADD": {
+					add();
+					break;
+				}
+				case "BY_YEAR":
+					stm.sortByYear();
+					updateTextArea();
+					break;
+				case "BY_NAME":
+					stm.sortByName();
+					updateTextArea();
+					break;
+
+				}
+			}
+
+			private void updateTextArea() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			private void add() {
+				// TODO Auto-generated method stub
+
+			}
+
+			private void find() {
+				// TODO Auto-generated method stub
+				int id = Integer.parseInt(idTfield.getText());
+				Student st = stm.findById(id);
+				String mess;
+				if (st != null) {
+					nameTfield.setText(st.getName());
+					yearTfield.setText("" + st.getbYear());
+					gradeTfield.setText("" + st.getGrade());
+				} else { // không tìm thấy
+					mess = "Không tìm thấy sinh viên có MSSV: " + id;
+					Toolkit.getDefaultToolkit().beep();
+					JOptionPane.showConfirmDialog(null, mess, "Lỗi", JOptionPane.CLOSED_OPTION);
+
+				}
+			}
+		};
+	}
+
+	public static void main(String[] args) {
+		new MainFrame();
+	}
+}

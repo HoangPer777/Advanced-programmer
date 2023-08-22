@@ -1,0 +1,34 @@
+package chuong3;
+
+import java.util.Scanner;
+
+/*
+ * Nhập từ bàn phím vào các số nguyên và dừng lại khi nhập giá trị 0. 
+ * Tính tổng, trung bình cộng
+ * và tìm giá trị lớn nhất của các số nguyên vừa nhập.
+ */
+public class bai1_16 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Nhap cac so nguyen: ");
+		System.out.println("[Nhan 0 de dung!]");
+		int n = sc.nextInt();
+		int max = 0;
+		int i = 1;
+		int sum = 0;
+		
+		do {
+			n = sc.nextInt();
+			
+			if(n > max) {
+				max = n;
+				i++;
+				
+			}
+		}while (n != 0);sum = sum + n; // n khac 0 thi chay tiep
+		System.out.println("max= "+ max);
+		System.out.println(i);
+		System.out.println("Tong= " + sum);
+		
+	}
+}

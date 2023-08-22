@@ -1,0 +1,43 @@
+package cau2;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Main {
+//	private static final List<NhanVien> NhanVien = null;
+
+	public List<NhanVien> sapXep(NhanVien[] data) {
+		List<NhanVien> NhanViens = new ArrayList<>();
+		NhanViens.add(new NhanVien(1, "Phan Van Hoang", 1000));
+		NhanViens.add(new NhanVien(2, "Le Phi Hung", 1000));
+		NhanViens.add(new NhanVien(3, "Pham Van Tinh", 1000));
+		NhanViens.add(new NhanVien(4, "Nguyen Thi Lang", 1000));
+		NhanViens.add(new NhanVien(5, "Vo Thi Cam Tu", 1000));
+
+		Collections.sort(NhanViens, new Comparator<NhanVien>() {
+
+			@Override
+			public int compare(NhanVien o1, NhanVien o2) {
+				// TODO Auto-generated method stub
+				if (o1.getName().equals(o2.getName())) {
+					return (int) (o1.getLuong() - o2.getLuong());
+				}
+				return o1.getName().compareTo(o2.getName());
+			}
+
+		});
+		for (NhanVien nhanVien : NhanViens) {
+			System.out.println(nhanVien);
+		}
+
+		return NhanViens;
+
+	}
+
+	public static void main(String[] args) {
+		new Main();
+
+	}
+}

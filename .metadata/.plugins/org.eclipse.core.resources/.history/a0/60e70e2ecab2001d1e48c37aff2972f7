@@ -1,0 +1,8 @@
+package chuong3;
+//Cho 2 số tự nhiên a và b. 
+//Tìm ước số chung lớn nhất và bội số chung nhỏ nhất của 2 số đó.
+public class bai1_19 {
+	public static void main(String[] args) {
+		
+	}
+}

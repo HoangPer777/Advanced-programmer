@@ -1,0 +1,24 @@
+package chuong3_bai1_23;
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Nhan so n: ");
+		int n = sc.nextInt();
+
+		int sum = 0;
+		for (int i = 1; i <= n; i++) {
+			sum = sum + i;
+
+		}
+		
+		
+//		Method m1 = new Method();
+//		m1.sum(n);
+	
+		System.out.println("sum n so = " + 	Method.sum(n));
+	}
+
+}

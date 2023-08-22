@@ -1,0 +1,31 @@
+import java.util.Arrays;
+/*
+ * Cho trước 2 mảng số nguyên bất kỳ intArr1 và intArr2. 
+ * Viết hàm xác định mảng thứ nhất (intArr1) có chứa mảng thứ 2 (intArr2) hay không.
+ */
+public class contain {
+	int j = 0;
+
+	public static boolean check_contain_array(int arr1[], int arr2[]) {
+
+		for (int i = 0; i < arr1.length - arr2.length - 1; i++) {
+			for (int j = 0; j < arr2.length; j++) {
+				if (arr1[j] != arr2[j]) {
+					int stemp = arr1[i];
+					arr1[arr1.length - 1] = stemp;
+					arr1[i] = arr1[arr1.length - 1];
+					arr1 = Arrays.copyOf(arr1, arr1.length - 1);
+				} else {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static void main(String[] args) {
+		int arr1[] = { 1, 2, 3};
+		int arr2[] = { 1, 2, 3, 4, 5, 6 };
+		System.out.println("" + check_contain_array(arr1, arr2));
+	}
+}

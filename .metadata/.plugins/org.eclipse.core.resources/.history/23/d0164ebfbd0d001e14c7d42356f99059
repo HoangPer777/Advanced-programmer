@@ -1,0 +1,26 @@
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class test extends JFrame{
+	public test() {
+		setTitle("may tinh");
+		setSize(300, 400);
+		
+		JPanel displayPL = createDisplayPL();
+		JPanel KeyPL = new JPanel();
+		this.add(displayPL);
+		this.add(KeyPL);
+		
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+	private JPanel createDisplayPL() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public static void main(String[] args) {
+		new test();
+	}
+	
+}

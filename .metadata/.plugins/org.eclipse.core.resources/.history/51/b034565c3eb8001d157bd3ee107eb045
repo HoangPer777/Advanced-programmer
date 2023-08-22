@@ -1,0 +1,19 @@
+package chuong3_bai1_25;
+
+import java.util.Scanner;
+
+public class out {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Nhap so n: ");
+		int n = sc.nextInt();
+		
+		System.out.println("Nhap so x: ");
+		double x = sc.nextDouble();
+		
+		System.out.println("P1 = " + Method.P1(n, x));
+		System.out.println("P1 = " + Method.P2(n, x));
+		System.out.println("P1 = " + Method.(n, x));
+	}
+}
